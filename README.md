@@ -9,9 +9,10 @@ Quizás lo vaya mejorando
 
 1 ) Utilizar primero shoutgraph.py
 
-python shoutgraph.py archivodeacciones.csv
+python shoutgraph.py archivodeacciones.csv [nickname]
 
-IMPORTANTE: Cambiar el valor de la variable USERID_CRAFTMANJR (en shoutgraph.py) por el userid que quieras.
+Si no usan el parámetro "nickname", por defecto utilizará el mío, linces ibéricos del Himalaya
+;)
 
 
 2 ) ... y luego stats.py
