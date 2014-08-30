@@ -3,9 +3,10 @@ import csv
 import httplib
 import json
 from collections import Counter
+from taringa import Taringa
+import traceback
 
-TARINGA_API_HOST = "api.taringa.net"
-PATH_USER = "/user/view/"
+taringa = Taringa()
 
 def main(inputfile,R,L):
     actions_rs = []
@@ -44,24 +45,15 @@ def main(inputfile,R,L):
 
 
 def get_username(userid):
-        host = TARINGA_API_HOST
-        path = PATH_USER
-        conn = httplib.HTTPConnection(host)
-        
-        try:
-            req = conn.request("GET", path + str(userid))
-        except:
-            sys.stderr.write('ERROR obteniendo recurso\n')
-            sys.stderr.write("HOST = " + host + '\n')
-            sys.stderr.write("PATH = " + path + str(userid) + '\n')
-            traceback.print_exc(file=sys.stdout)
-            sys.exit(1)
-        
-        res = conn.getresponse()
-        raw_contents = res.read()
-        contents = json.loads(raw_contents)
-        
-        return contents['nick']
+    try:
+        contents = taringa.user_by_id(userid)
+    except:
+        sys.stderr.write('ERROR obteniendo recurso: datos de usuario (por id)\n')
+        sys.stderr.write('userid = ' + str(userid))
+        traceback.print_exc(file=sys.stdout)
+        sys.exit(1)
+            
+    return contents['nick']
 
 def printhelp():
     print "Modo de uso:\n"
