@@ -29,7 +29,20 @@ def main(inputfile,R,L):
     top10_reshouters = reshouts.most_common(R)
     top10_likers =  likes.most_common(L)
 
-    user_ids = set(zip(*top10_reshouters)[0]).union(set(zip(*top10_likers)[0]))
+    if len(top10_likers) == 0 and len(top10_reshouters) == 0:
+        print "Lo lamento ):"
+        print "Ninguno de los shouts obtenidos de este usuario ha recibido likes o reshouts\n"
+        sys.exit(0)
+
+    if len(top10_reshouters) > 0:
+        if len(top10_likers) > 0:
+            user_ids = set(zip(*top10_reshouters)[0]).union(set(zip(*top10_likers)[0]))
+        else:
+            user_ids = set(zip(*top10_likers)[0])
+    else:
+        user_ids = set(zip(*top10_reshouters)[0]).union(set(zip(*top10_likers)[0]))
+
+
     userid_username = {}
     for userid in user_ids:
         userid_username[userid] = get_username(userid)
@@ -49,7 +62,7 @@ def get_username(userid):
         contents = taringa.user_by_id(userid)
     except:
         sys.stderr.write('ERROR obteniendo recurso: datos de usuario (por id)\n')
-        sys.stderr.write('userid = ' + str(userid))
+        sys.stderr.write('userid = ' + str(userid) + "\n")
         traceback.print_exc(file=sys.stdout)
         sys.exit(1)
             

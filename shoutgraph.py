@@ -20,7 +20,7 @@ def get_shouts(userid):
     
     print "Obteniendo shouts..."
     for page in range(1,21):    # = [ 1 .. (21-1) ]
-        print "Pagina ", page, " de 20"
+        print "Pagina ", page, " de 20(MAX)"
         try:
             contents = taringa.user_shouts(userid,page=page)
 
@@ -30,10 +30,15 @@ def get_shouts(userid):
             traceback.print_exc(file=sys.stdout)
             sys.exit(1)        
 
+        if contents == []:
+            break
+
         my_shouts_list += filter(lambda x: int(x["owner"]) == userid, contents)
         my_reshouts_list += filter(lambda x: int(x["owner"]) != userid, contents)
 
     print "Listo"
+    print "Total de shouts: ", len(my_shouts_list)
+    print "Total de reshouts: ", len(my_reshouts_list)
 
     f = open(FILE_SHOUTS_JSON, 'w')
     f.write(json.dumps(my_shouts_list))
@@ -97,9 +102,14 @@ def get_shout_actions( shout_id ):
     
     
    
-def main(outfileCSV):
-    userid = USERID_CRAFTMANJR
-    
+def main(outfileCSV, username):
+    if username is None:
+        userid = USERID_CRAFTMANJR
+        print "Usuario (default) : craftmanJr\n"
+    else:
+        userid = int(taringa.user_by_nick(username)["id"])
+        print "Usuario : ", username
+
     #Obtiene los ultimos reshouts del usuario con este userid
     # (como devuelve la api de taringa: en formato json)
     get_shouts(userid)
@@ -115,8 +125,12 @@ def main(outfileCSV):
 if __name__=='__main__':
     try:
         outfileCSV = sys.argv[1]
-        main(outfileCSV)
+        username = None
+        if len(sys.argv) == 3:
+            username = sys.argv[2]        
     except:
         print "Indicar el nombre del archivo de salida (.csv)"
         traceback.print_exc(file=sys.stdout)
         sys.exit(1)
+
+    main(outfileCSV, username)
