@@ -20,6 +20,7 @@ def get_shouts(host, path, userid):
     my_shouts_list = []
     my_reshouts_list = []
     
+    print "Obteniendo shouts..."
     for page in range(1,21):    # = [ 1 .. (21-1) ]
         print "Pagina ", page, " de 20"
         conn = httplib.HTTPConnection(host)
@@ -69,6 +70,7 @@ def get_shouts_actions(host, path, infile_with_shouts_ids, file_with_actions_csv
         
     shouts_actions = []
 
+    print "Obteniendo acciones sobre shouts"
     for shout_id in ids:
         shouts_actions += get_shout_actions( host, path, shout_id )
 

@@ -33,12 +33,12 @@ def main(inputfile,R,L):
     for userid in user_ids:
         userid_username[userid] = get_username(userid)
 
-    print "TOP 10 Reshouts\n"
+    print "TOP %d Reshouts\n" % R
     for user in top10_reshouters:
         print userid_username[user[0]] + ' : ' + str(user[1])
 
     print "------------------------------"
-    print "\nTOP 20 Likes\n"
+    print "\nTOP %d Likes\n" % L
     for user in top10_likers:
         print userid_username[user[0]] + ' : ' + str(user[1])
 
