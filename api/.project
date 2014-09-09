@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>shout-stats-t</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>followgraph.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/followgraph.py</locationURI>
+		</link>
+		<link>
+			<name>posts-list.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/posts-list.py</locationURI>
+		</link>
+		<link>
+			<name>shoutgraph.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/shoutgraph.py</locationURI>
+		</link>
+		<link>
+			<name>stats.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/stats.py</locationURI>
+		</link>
+		<link>
+			<name>taringa.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/taringa.py</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
